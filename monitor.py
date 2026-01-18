@@ -14,6 +14,12 @@ def send_alert():
     receiver = os.environ.get('TARGET_EMAIL')
     secret = os.environ.get('SECRET_PAYLOAD')
 
+    if not sender: print("❌ MISSING: EMAIL_USER")
+    if not password: print("❌ MISSING: EMAIL_PASS")
+    if not receiver: print("❌ MISSING: TARGET_EMAIL")
+    if not secret: print("❌ MISSING: SECRET_PAYLOAD")
+
+    
     if not all([sender, password, receiver, secret]):
         print("Error: Missing environment variables for email.")
         return
