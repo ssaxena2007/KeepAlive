@@ -2,9 +2,7 @@ name: Dead Man's Switch Monitor
 
 on:
   schedule:
-    # Runs at 00:00 UTC every day
     - cron: '0 0 * * *'
-  # Allows you to run this workflow manually from the Actions tab for testing
   workflow_dispatch:
 
 jobs:
@@ -21,7 +19,9 @@ jobs:
           python-version: '3.9'
 
       - name: Run Monitor Script
+        env: # <--- THIS IS THE NEW PART
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          TARGET_EMAIL: ${{ secrets.TARGET_EMAIL }}
+          SECRET_PAYLOAD: ${{ secrets.SECRET_PAYLOAD }}
         run: python monitor.py
-
-
-        
